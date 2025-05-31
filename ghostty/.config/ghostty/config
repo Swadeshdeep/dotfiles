@@ -1,0 +1,61 @@
+theme = Kanagawa Wave
+# window-decoration=false
+# palette = 0=#16161d
+# palette = 1=#c34043
+palette = 2=#98BB6C
+# palette = 3=#c0a36e
+# palette = 4=#7e9cd8
+# palette = 5=#957fb8
+# palette = 6=#6a9589
+# palette = 7=#c8c093
+# palette = 8=#727169
+# palette = 9=#e82424
+# palette = 10=#98bb6c
+# palette = 11=#e6c384
+# palette = 12=#7fb4ca
+# palette = 13=#938aa9
+# palette = 14=#7aa89f
+# palette = 15=#dcd7ba
+background = #000000
+# foreground = dcd7ba
+# cursor-color = c8c093
+# selection-background = 2d4f67
+# selection-foreground = c8c093
+#
+
+window-padding-x = 0
+window-padding-y = 0
+window-padding-balance = true
+
+#font-family = "JetBrainsMono NF"
+font-style = "JetBrains Mono NL"
+font-style-bold = "JetBrainsMonoNL NF Bold"
+font-style-italic = "JetBrainsMonoNL NF Italic"
+font-style-bold-italic = "JetBrainsMonoNL NF Bold Italic"
+font-feature = -calt, -liga, -dlig
+font-size = 14.75
+
+adjust-cell-height = 8%
+
+confirm-close-surface = false
+
+#to solve window switching problem in tmux
+#keybind = ctrl+1=text:\x01
+#keybind = ctrl+2=text:\x02
+#keybind = ctrl+3=text:\x03
+#keybind = ctrl+4=text:\x04
+#keybind = ctrl+5=text:\x05
+#keybind = ctrl+6=text:\x06
+#keybind = ctrl+7=text:\x07
+#keybind = ctrl+8=text:\x08
+# keybind = alt+1=text:\x1b1
+keybind = ctrl+backspace=text:\x1b\x7f
+
+#background-opacity = 0.88
+
+mouse-hide-while-typing = true
+
+#custom-shader = shader/bloom025.glsl
+
+# background-blur = 20
+# background-opacity = 0.85
