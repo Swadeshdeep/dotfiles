@@ -1,0 +1,94 @@
+return {
+  {
+    "nvim-orgmode/orgmode",
+    event = "VeryLazy",
+    config = function()
+      -- Setup orgmode
+      require("orgmode").setup({
+        org_agenda_files = "~/sync/agenda.org",
+        org_default_notes_file = "~/sync/test.org",
+        notifications = {
+          enabled = true,
+          cron_enabled = true,
+          repeater_reminder_time = { 0, 1, 5, 10 },
+          deadline_warning_reminder_time = { 0, 1, 5, 10 },
+          reminder_time = { 0, 1, 5, 10 },
+          deadline_reminder = true,
+          scheduled_reminder = true,
+          -- Function for in-Neovim notifications
+          notifier = function(tasks)
+            local result = {}
+            for _, task in ipairs(tasks) do
+              table.insert(result, string.format("# %s (%s)", task.category, task.humanized_duration))
+              table.insert(result, string.format("%s %s %s", string.rep("*", task.level), task.todo, task.title))
+              table.insert(result, string.format("%s: <%s>", task.type, task.time:to_string()))
+              table.insert(result, "")
+            end
+
+            if not vim.tbl_isempty(result) then
+              require("snacks").notify(table.concat(result, "\n"), {
+                title = "📅 Org Reminder",
+                ft = "org",
+              })
+            end
+          end,
+          -- Function for system notifications via cron
+          cron_notifier = function(tasks)
+            for _, task in ipairs(tasks) do
+              local title = string.format("%s (%s)", task.category, task.humanized_duration)
+              local subtitle = string.format("%s %s %s", string.rep("*", task.level), task.todo, task.title)
+              local date = string.format("%s: <%s>", task.type, task.time:to_string())
+
+              -- Linux notification
+              if vim.fn.executable("notify-send") == 1 then
+                vim.system({
+                  "notify-send",
+                  "--app-name=orgmode",
+                  title,
+                  string.format("%s\n%s", subtitle, date),
+                })
+              end
+            end
+          end,
+        },
+      })
+    end,
+  },
+  {
+    "akinsho/org-bullets.nvim",
+    config = function()
+      require("org-bullets").setup()
+    end,
+  },
+  -- init.lua
+  {
+    "lukas-reineke/headlines.nvim",
+    dependencies = "nvim-treesitter/nvim-treesitter",
+    config = true, -- or `opts = {}`
+  },
+  {
+    "chipsenkbeil/org-roam.nvim",
+    config = function()
+      require("org-roam").setup({
+        directory = "~/org_roam_files",
+        -- optional
+        org_files = {
+          "~/sync/agenda.org",
+          "~/sync/test.org",
+        },
+      })
+    end,
+  },
+  -- {
+  --   "hrsh7th/nvim-cmp",
+  --   opts = function(_, opts)
+  --     local cmp = require("cmp")
+  --
+  --     -- Ensure sources exist before modifying
+  --     opts.sources = opts.sources or {}
+  --
+  --     -- Add orgmode to the sources list
+  --     table.insert(opts.sources, { name = "orgmode" })
+  --   end,
+  -- },
+}

@@ -1,0 +1,43 @@
+-- In your lua/plugins/lualine.lua (or wherever you configure plugins)
+return {
+  "nvim-lualine/lualine.nvim",
+  event = "VeryLazy",
+  opts = {
+    -- your existing lualine config options here
+  },
+  config = function(_, opts)
+    -- Initialize lualine with the options
+    require("lualine").setup(opts)
+
+    -- Variable to track lualine state - starting disabled
+    vim.g.lualine_enabled = false
+
+    -- Function to toggle lualine
+    local function toggle_lualine()
+      if vim.g.lualine_enabled then
+        -- Hide lualine
+        vim.opt.laststatus = 0 -- Disable statusline completely
+        require("lualine").hide()
+        vim.g.lualine_enabled = false
+      else
+        -- Show lualine
+        vim.opt.laststatus = 3 -- Global statusline
+        require("lualine").hide({ unhide = true })
+        vim.g.lualine_enabled = true
+      end
+
+      -- Force redraw of the statusline
+      vim.cmd("redrawstatus")
+    end
+
+    -- Create a command to toggle lualine
+    vim.api.nvim_create_user_command("ToggleLualine", toggle_lualine, {})
+
+    -- Optional: Add a keybinding
+    vim.keymap.set("n", "<leader>tl", "<cmd>ToggleLualine<CR>", { desc = "Toggle Lualine" })
+
+    -- Disable lualine immediately after setup
+    vim.opt.laststatus = 0
+    require("lualine").hide()
+  end,
+}
