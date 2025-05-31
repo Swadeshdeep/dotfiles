@@ -1,0 +1,103 @@
+{
+    "layer": "top",
+    "position": "top",
+    "height": 24,
+    "spacing": 5,
+
+    "modules-left": ["hyprland/workspaces"],
+    "modules-center": ["hyprland/window"],
+    "modules-right": ["memory", "custom/network", "temperature", "wireplumber", "battery", "network", "bluetooth", "tray", "clock"],
+
+    "hyprland/workspaces": {
+        "format": "{name}",
+        "on-click": "activate",
+        "sort-by-number": true,
+        "persistent-workspaces": {
+            "1": [],
+            "2": [],
+            "3": [],
+            "4": []
+        },
+        "active-only": false,
+        "format-icons": {
+            "urgent": "",
+            "default": ""
+        }
+    },
+
+    "hyprland/window": {
+        "format": "{}",
+        "max-length": 50
+    },
+
+    "clock": {
+        "format": "{:%d.%m.%Y | %H:%M}",
+        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>"
+    },
+
+    "wireplumber": {
+        "format": "󰕾 {volume}%",
+        "max-volume": 100,
+        "scroll-step": 5,
+        "on-click": "pavucontrol",
+        "on-click-right": "foot -a pw-top pw-top"
+    },
+
+    "battery": {
+        "bat": "BAT0",
+        "interval": 30,
+        "format": "{icon} {capacity}%",
+        "format-charging": " {capacity}%",
+        "format-plugged": " {capacity}%",
+        "format-icons": ["", "", "", "", ""],
+        "states": {
+            "warning": 30,
+            "critical": 15
+        },
+        "tooltip-format": "Time remaining: {timeTo}"
+    },
+
+    "memory": {
+        "interval": 30,
+        "format": " {used:0.1f}G",
+        "on-click": "missioncenter"
+    },
+
+    "custom/network": {
+        "exec": "bash -c 'prev_rx=$(cat /sys/class/net/wlan0/statistics/rx_bytes); prev_tx=$(cat /sys/class/net/wlan0/statistics/tx_bytes); sleep 1; curr_rx=$(cat /sys/class/net/wlan0/statistics/rx_bytes); curr_tx=$(cat /sys/class/net/wlan0/statistics/tx_bytes); rx_speed=$((($curr_rx-$prev_rx)/1024)); tx_speed=$((($curr_tx-$prev_tx)/1024)); if [ $rx_speed -ge 1000 ]; then rx_speed=$(echo \"scale=1; $rx_speed/1024\" | bc); rx_unit=\"MB/s\"; else rx_unit=\"KB/s\"; fi; if [ $tx_speed -ge 1000 ]; then tx_speed=$(echo \"scale=1; $tx_speed/1024\" | bc); tx_unit=\"MB/s\"; else tx_unit=\"KB/s\"; fi; echo \"{\\\"text\\\": \\\" ${rx_speed}${rx_unit}  ${tx_speed}${tx_unit}\\\", \\\"tooltip\\\": \\\"Download: ${rx_speed}${rx_unit}\\nUpload: ${tx_speed}${tx_unit}\\\"}\"'",
+        "interval": 1,
+        "return-type": "json"
+    },
+
+    "temperature": {
+        "format": " {temperatureC}°C",
+        "on-click": "ghostty -e btop"
+    },
+
+    "network": {
+        "format": "",
+        "format-ethernet": "󰌷",
+        "format-wifi": "{icon}",
+        "format-disconnected": "󰤭",
+        "format-icons": ["󰤯", "󰤟", "󰤢", "󰤥", "󰤨"],
+        "tooltip-format-wifi": "{essid} ({signalStrength}%)",
+        "tooltip-format-ethernet": "{ifname}",
+        "tooltip-format-disconnected": "Disconnected",
+        "on-click": "kitty -e nmtui"
+    },
+
+    "bluetooth": {
+        "format": "󰂯",
+        "format-disabled": "󰂲",
+        "format-connected": "󰂱",
+        "tooltip-format": "{controller_alias}\t{controller_address}",
+        "tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{device_enumerate}",
+        "tooltip-format-enumerate-connected": "{device_alias}\t{device_address}",
+        "on-click": "blueman-manager"
+    },
+
+    "tray": {
+        "icon-size": 16,
+        "spacing": 6
+    }
+}

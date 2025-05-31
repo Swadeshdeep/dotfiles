@@ -1,0 +1,93 @@
+@define-color foreground #dcd7ba;
+@define-color foreground-inactive #727169;
+@define-color background #000000;
+@define-color active-workspace #7e9cd8;
+
+* {
+  font-family: JetBrainsMono Nerd Font;
+  font-size: 17px;
+  padding: 0;
+  margin: 0;
+}
+
+#waybar {
+  color: @foreground;
+  background-color: @background;
+}
+
+#workspaces button {
+  color: @foreground;
+  padding-left: 0.5em;
+  padding-right: 0.5em;
+  margin: 0 2px;
+  border-radius: 2px;
+}
+
+#workspaces button.active {
+  background-color: @active-workspace;
+  color: @background;
+  opacity: 0.8;
+}
+
+#workspaces button.urgent {
+  color: #ff0000;
+  animation: urgent 1s infinite;
+}
+
+@keyframes urgent {
+  0% { opacity: 1; }
+  50% { opacity: 0.5; }
+  100% { opacity: 1; }
+}
+
+#workspaces button.empty {
+  color: #666666;
+}
+
+#memory {
+  padding-left: 1em;
+  padding-right: 0.2em;
+}
+
+#custom-network {
+  padding-left: 0.2em;
+  padding-right: 0.2em;
+}
+
+#network-speed {
+  padding-left: 0.2em;
+  padding-right: 0.2em;
+}
+
+#temperature {
+  padding-left: 0.2em;
+  padding-right: 0.5em;
+}
+
+#wireplumber {
+  padding-right: 0.5em;
+}
+
+#battery {
+  padding-right: 0.5em;
+}
+
+#backlight {
+  padding-right: 0.5em;
+}
+
+#network {
+  padding-right: 0.5em;
+}
+
+#bluetooth {
+  padding-right: 0.5em;
+}
+
+#tray {
+  padding-right: 0.5em;
+}
+
+#clock {
+  padding-right: 0.8em;
+}
