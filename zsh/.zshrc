@@ -319,7 +319,7 @@ export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
 # gemenie api
-export GEMINI_API_KEY=AIzaSyD9IVNsuMRlXwdTQT4Krayu4ivDzH-1abE
+export GEMINI_API_KEY=
 source /usr/share/nvm/init-nvm.sh
 
 export TERM=xterm-ghostty
