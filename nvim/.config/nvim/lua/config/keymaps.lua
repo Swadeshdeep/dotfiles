@@ -27,3 +27,6 @@ map("n", "<leader>o", "<cmd>Oil --float<cr>", { desc = "Oil.nvim" })
 -- for changing the use of d key
 map({ "n", "v" }, "d", '"_d', { noremap = true })
 map("n", "x", '"_x', { noremap = true }) -- for visual char-wise delete
+
+-- for diffview in neovim
+map("n", "<leader>gv", "<cmd>DiffviewFileHistory<cr>", { desc = "Change Theme" })
