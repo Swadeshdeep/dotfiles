@@ -308,6 +308,7 @@ alias c.="cursor . &"
 # alias wo="pomodoro 'work'"
 # alias br="pomodoro 'break'"
 
+source <(fzf --zsh)
 export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .wine'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 
