@@ -129,39 +129,27 @@ if [[ -n "${ZSH_VI_MODE_PLUGIN}" || -n "${ZVM_INIT}" ]]; then
 fi
 zvm_after_init_commands+=('bindkey "^R" fzf_custom_history_search')
 
-# Advanced directory navigation with custom preview width
+# Perfect directory navigation that works with zsh-vi-mode
 fzf_cd_widget() {
   local dir
-  local preview_cmd="ls -la {}"
-  local exclude_dirs=".git node_modules .cache .vscode"
-  
-  # Build find command with multiple exclusions
-  local find_cmd="find ${1:-.} -type d \( "
-  local first=true
-  
-  for exclude in $exclude_dirs; do
-    if $first; then
-      find_cmd+=" -name \"$exclude\" "
-      first=false
-    else
-      find_cmd+=" -o -name \"$exclude\" "
-    fi
-  done
-  
-  find_cmd+="\) -prune -o -type d -print"
-  
-  # Run the search
-  dir=$(eval $find_cmd 2> /dev/null |
-        fzf --height 40% --layout=reverse --prompt="Dir > " --border \
-            --preview "$preview_cmd" --preview-window=right:50%:wrap)
+  dir=$(fd --type d --hidden . 2>/dev/null | \
+    fzf --height 40% \
+        --layout=reverse \
+        --prompt="📁 Dir > " \
+        --border \
+        --preview 'ls -la --color=always {}' \
+        --preview-window=right:50%:wrap)
   
   if [[ -n "$dir" ]]; then
     cd "$dir"
     zle reset-prompt
   fi
 }
+
 zle -N fzf_cd_widget
-bindkey '^F' fzf_cd_widget  # Ctrl+F to fuzzy find directories
+bindkey '^F' fzf_cd_widget
+
+# THIS IS THE CRUCIAL LINE - uncomment and add this to make Ctrl+F work with zsh-vi-mode
 zvm_after_init_commands+=('bindkey "^F" fzf_cd_widget')
 
 # Interactive process killer
