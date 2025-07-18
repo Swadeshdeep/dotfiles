@@ -27,6 +27,14 @@ fpath+=${ZSH_CUSTOM:-${ZSH:-~/.oh-my-zsh}/custom}/plugins/zsh-completions/src
 
 source $ZSH/oh-my-zsh.sh
 
+# Configure zsh-autosuggestions BEFORE defining widgets
+ZSH_AUTOSUGGEST_CLEAR_WIDGETS+=(
+  fzf_file_widget
+  fzf_custom_history_search
+  fzf_cd_widget
+  fzf_kill_widget
+)
+
 # Zsh-vi-mode optimizations
 ZVM_READKEY_ENGINE=$ZVM_READKEY_ENGINE_NEX
 ZVM_KEYTIMEOUT=0.01
@@ -53,11 +61,79 @@ export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 export FZF_DEFAULT_OPTS='--height 40% --layout=reverse --border --preview-window=right:50%:wrap'
 
 #######################################################################################################################
-# FZF WIDGETS - Improved and consistent
+# FZF WIDGETS - Fixed and working
 #######################################################################################################################
+
+# Smart file opener function
+open_file_smart() {
+  local file="$1"
+  local ext="${file##*.}"
+  
+  case "$ext" in
+    # Code files
+    py|js|ts|jsx|tsx|html|css|scss|json|yaml|yml|toml|rs|go|cpp|c|h|hpp|java|kt|swift|php|rb|sh|zsh|bash|fish|vim|lua|md|txt|conf|config|ini|env) 
+      nvim "$file" ;;
+    
+    # Video files
+    mp4|mkv|avi|mov|wmv|flv|webm|m4v|3gp|ogv)
+      mpv "$file" ;;
+    
+    # Audio files
+    mp3|flac|wav|aac|ogg|m4a|wma|opus)
+      mpv "$file" ;;
+    
+    # Images
+    jpg|jpeg|png|gif|bmp|tiff|tif|svg|webp|ico)
+      # Use your preferred image viewer
+      feh "$file" 2>/dev/null || open "$file" 2>/dev/null || xdg-open "$file" 2>/dev/null ;;
+    
+    # PDFs
+    pdf)
+      zathura "$file" 2>/dev/null || open "$file" 2>/dev/null || xdg-open "$file" 2>/dev/null ;;
+    
+    # Archives
+    zip|tar|gz|bz2|xz|7z|rar)
+      echo "Archive: $file"
+      file "$file" ;;
+    
+    # Default: open with nvim for text files, just print filename for executables/unknown files
+    *)
+      if file "$file" | grep -q "text"; then
+        nvim "$file"
+      elif [[ -x "$file" ]] || file "$file" | grep -q "executable"; then
+        echo "$file"
+      else
+        echo "$file"
+      fi ;;
+  esac
+}
+
+# File widget with explicit fd command
+fzf_file_widget() {
+  # Clear buffer and autosuggestions
+  zle kill-whole-line
+  zle autosuggest-clear 2>/dev/null || true
+  
+  local file
+  # Use fd command explicitly instead of relying on FZF_DEFAULT_COMMAND
+  file=$(fd --type f --hidden --follow --exclude .wine --exclude .git --exclude node_modules | \
+         fzf --height 40% \
+             --layout=reverse \
+             --prompt="📄 File > " \
+             --border \
+             --preview 'bat --color=always --style=numbers --line-range=:500 {} 2>/dev/null || cat {} 2>/dev/null || echo "Binary file or no preview available"' \
+             --preview-window=right:50%:wrap)
+  
+  if [[ -n "$file" ]]; then
+    open_file_smart "$file"
+  fi
+  
+  zle reset-prompt
+}
 
 # History search with better preview
 fzf_custom_history_search() {
+  zle autosuggest-clear 2>/dev/null || true
   setopt localoptions pipefail no_aliases 2> /dev/null
   
   local current_buffer=$BUFFER
@@ -80,6 +156,7 @@ fzf_custom_history_search() {
 
 # Directory navigation with exa preview (consistent with your aliases)
 fzf_cd_widget() {
+  zle autosuggest-clear 2>/dev/null || true
   local dir
   dir=$(fd --type d --hidden --exclude .git --exclude node_modules 2>/dev/null | \
     fzf --height 40% \
@@ -91,12 +168,13 @@ fzf_cd_widget() {
   
   if [[ -n "$dir" ]]; then
     cd "$dir"
-    zle reset-prompt
   fi
+  zle reset-prompt
 }
 
 # Process killer with better formatting
 fzf_kill_widget() {
+  zle autosuggest-clear 2>/dev/null || true
   local pid
   pid=$(ps -eo pid,ppid,user,comm,cmd --sort=-%cpu | 
         fzf --multi --header="Select processes to kill" \
@@ -112,17 +190,20 @@ fzf_kill_widget() {
 }
 
 # Register widgets
+zle -N fzf_file_widget
 zle -N fzf_custom_history_search
 zle -N fzf_cd_widget
 zle -N fzf_kill_widget
 
-# Keybindings
+# Initial keybindings
+bindkey '^T' fzf_file_widget
 bindkey '^R' fzf_custom_history_search
 bindkey '^F' fzf_cd_widget
 bindkey '^K' fzf_kill_widget
 
-# Zsh-vi-mode compatibility
+# Zsh-vi-mode compatibility - rebind after vi-mode initializes
 zvm_after_init_commands+=(
+  'bindkey "^T" fzf_file_widget'
   'bindkey "^R" fzf_custom_history_search'
   'bindkey "^F" fzf_cd_widget'
   'bindkey "^K" fzf_kill_widget'
@@ -168,7 +249,7 @@ alias lga='exa -la --git --icons --color=always'
 
 # Neovim config switcher
 function nvims() {
-  items=("nvim" "LazyVim" "personal-nvim" "devnvim" "devnvim-2" "NvChad" "AstroNvim")
+  items=("nvim" "LazyVim" "personal-nvim" "devnvim-2" "NvChad" "AstroNvim")
   config=$(printf "%s\n" "${items[@]}" | fzf --prompt=" Neovim Config > " --height=~50% --layout=reverse --border --exit-0)
   if [[ -z $config ]]; then
     echo "Nothing selected"
@@ -200,11 +281,12 @@ dirinfo() {
 eval $(thefuck --alias fuck)
 eval "$(zoxide init zsh)"
 eval "$(starship init zsh)"
-source <(fzf --zsh)
+# source <(fzf --zsh)
 
 # Load external sources
 [ -s "/home/swadesh/.bun/_bun" ] && source "/home/swadesh/.bun/_bun"
 source /usr/share/nvm/init-nvm.sh
 
-# Final keybindings
+# Final keybindings - ensure they stick
 bindkey -s ^b "nvims\n"
+bindkey '^T' fzf_file_widget
