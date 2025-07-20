@@ -96,14 +96,10 @@ open_file_smart() {
       echo "Archive: $file"
       file "$file" ;;
     
-    # Default: open with nvim for text files, just print filename for executables/unknown files
+    # Default: open with nvim for text files
     *)
       if file "$file" | grep -q "text"; then
         nvim "$file"
-      elif [[ -x "$file" ]] || file "$file" | grep -q "executable"; then
-        echo "$file"
-      else
-        echo "$file"
       fi ;;
   esac
 }
@@ -125,7 +121,16 @@ fzf_file_widget() {
              --preview-window=right:50%:wrap)
   
   if [[ -n "$file" ]]; then
-    open_file_smart "$file"
+    local ext="${file##*.}"
+    # Check if it's an unknown/executable file
+    if [[ ! "$ext" =~ ^(py|js|ts|jsx|tsx|html|css|scss|json|yaml|yml|toml|rs|go|cpp|c|h|hpp|java|kt|swift|php|rb|sh|zsh|bash|fish|vim|lua|md|txt|conf|config|ini|env|mp4|mkv|avi|mov|wmv|flv|webm|m4v|3gp|ogv|mp3|flac|wav|aac|ogg|m4a|wma|opus|jpg|jpeg|png|gif|bmp|tiff|tif|svg|webp|ico|pdf|zip|tar|gz|bz2|xz|7z|rar)$ ]] || [[ -x "$file" ]] || file "$file" | grep -q "executable"; then
+      # For unknown/executable files, put filename in command line buffer
+      BUFFER="$file"
+      CURSOR=$#BUFFER
+    else
+      # For known files, open them
+      open_file_smart "$file"
+    fi
   fi
   
   zle reset-prompt
