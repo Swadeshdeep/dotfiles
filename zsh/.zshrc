@@ -248,6 +248,9 @@ alias lss='exa -l --sort=size --icons --color=always'
 alias lg='exa -l --git --icons --color=always'
 alias lga='exa -la --git --icons --color=always'
 
+# LazyGit
+alias lgit='lazygit'
+
 #######################################################################################################################
 # FUNCTIONS
 #######################################################################################################################
