@@ -1,23 +1,22 @@
 #!/bin/bash
-
 # Handle different modes
 MODE="$1"
 
-FILENAME="$(xdg-user-dir PICTURES)/Screenshots/$(date +%s)_grim.png"
-mkdir -p "$(dirname "$FILENAME")"
-
 case "$MODE" in
 full)
-  grim "$FILENAME"
+  grim - | wl-copy
   ;;
 region)
-  grim -g "$(slurp)" "$FILENAME"
+  grim -g "$(slurp)" - | wl-copy
   ;;
 region-o)
-  grim -g "$(slurp -o)" "$FILENAME"
+  grim -g "$(slurp -o)" - | wl-copy
   ;;
 *)
   echo "Usage: screenshot.sh [full|region|region-o]"
   exit 1
   ;;
 esac
+
+# Show notification that screenshot was copied
+notify-send "Screenshot" "Screenshot copied to clipboard"
