@@ -2,7 +2,7 @@
 -- Simple Mason tools installer for LazyVim with exclusion support
 return {
   {
-    "williamboman/mason.nvim",
+    "mason-org/mason.nvim",
     opts = function(_, opts)
       local function list_to_set(list)
         local set = {}

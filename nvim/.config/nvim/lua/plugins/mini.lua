@@ -1,5 +1,5 @@
 return {
-  "echasnovski/mini.nvim",
+  "nvim-mini/mini.nvim",
   require("mini.files").setup({
     options = {
       -- Whether to delete permanently or move into module-specific trash
