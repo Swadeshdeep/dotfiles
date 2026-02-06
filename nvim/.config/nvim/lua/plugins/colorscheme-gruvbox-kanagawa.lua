@@ -10,6 +10,11 @@ return {
     end,
   },
   -- {
+  --   "motaz-shokry/gruvbox.nvim",
+  --   name = "gruvbox",
+  --   priority = 1000,
+  -- },
+  -- {
   --   "rebelot/kanagawa.nvim",
   --   opts = {
   --     theme = "wave", -- Use "dragon" or "lotus" if you prefer

@@ -55,7 +55,7 @@ keybind = ctrl+backspace=text:\x1b\x7f
 
 mouse-hide-while-typing = true
 
-#custom-shader = shader/bloom025.glsl
+custom-shader = shaders/cursor_wrap.glsl
 
 # background-blur = 20
 # background-opacity = 0.85
