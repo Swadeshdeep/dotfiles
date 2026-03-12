@@ -9,6 +9,7 @@ return {
       vim.g.gruvbox_material_ui_contrast = "high" -- The contrast of line numbers, indent lines, etc.
     end,
   },
+  { "rebelot/kanagawa.nvim" },
   -- {
   --   "motaz-shokry/gruvbox.nvim",
   --   name = "gruvbox",

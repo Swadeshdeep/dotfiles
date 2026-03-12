@@ -65,6 +65,10 @@
 }
 
 #wireplumber {
+  padding-right: 0.2em;
+}
+
+#custom-mic_hw {
   padding-right: 0.5em;
 }
 

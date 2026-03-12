@@ -6,7 +6,7 @@
 
     "modules-left": ["hyprland/workspaces"],
     "modules-center": ["hyprland/window"],
-    "modules-right": ["memory", "custom/network", "temperature", "wireplumber", "battery", "network", "bluetooth", "tray", "clock"],
+    "modules-right": ["memory", "custom/network", "temperature", "wireplumber", "custom/mic_hw", "battery", "network", "bluetooth", "tray", "clock"],
 
     "hyprland/workspaces": {
         "format": "{name}",
@@ -42,6 +42,13 @@
         "scroll-step": 5,
         "on-click": "pavucontrol",
         "on-click-right": "foot -a pw-top pw-top"
+    },
+
+    "custom/mic_hw": {
+        "exec": "~/.config/waybar/mic_hw_status.sh",
+        "interval": 1,
+        "return-type": "text",
+        "tooltip": false
     },
 
     "battery": {
