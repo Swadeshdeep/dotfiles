@@ -254,6 +254,10 @@ alias lgit='lazygit'
 # Opencode
 alias oc='opencode'
 
+# CPU Freq
+alias lowf='sudo cpupower frequency-set -u 1.7GHz'
+alias highf='sudo cpupower frequency-set -u 3.0GHz'
+
 #######################################################################################################################
 # FUNCTIONS
 #######################################################################################################################

@@ -1,7 +1,13 @@
-@define-color foreground #dcd7ba;
-@define-color foreground-inactive #727169;
-@define-color background #000000;
-@define-color active-workspace #7e9cd8;
+@define-color foreground #dcd7ba;          /* Kanagawa-like fg from original */
+@define-color foreground-inactive #727169; /* Dimmed text, original-like */
+@define-color background #050508;          /* Almost-black base, Kanagawa-ish */
+@define-color background-alt #0b0b10;      /* Slight lift */
+@define-color background-alt2 #14141c;     /* For modules */
+@define-color border-color #262631;        /* Soft border */
+@define-color active-workspace #7e9cd8;    /* Kanagawa blue hint */
+@define-color accent-purple #957fb8;       /* Subtle Kanagawa accent */
+@define-color accent-orange #e6c384;       /* Warm hint, used sparingly */
+@define-color accent-red #e46876;          /* Alert accent */
 
 * {
   font-family: JetBrainsMono Nerd Font;
@@ -12,86 +18,96 @@
 
 #waybar {
   color: @foreground;
+  /* Match your desktop black for seamless look */
   background-color: @background;
+  border-bottom: none;
+}
+
+/* Shared module look – compact clusters, no extra vertical padding */
+.module-group-left,
+.module-group-right {
+  background: @background-alt2;
+  border-radius: 999px;
+  border: 1px solid alpha(@border-color, 0.8);
+}
+
+#memory,
+#temperature,
+#custom-network,
+#wireplumber,
+#custom-mic_hw,
+#battery,
+#network,
+#bluetooth,
+#tray,
+#clock {
+  padding: 0 0.55em;       /* horizontal only, keeps height from growing */
+}
+
+/* Slightly wider padding for the first info module */
+#memory {
+  padding-left: 0.9em;
+}
+
+/* Extra breathing room at the far right end */
+#clock {
+  padding-right: 1.0em;
+}
+
+/* Icons-only elements a bit tighter */
+#network,
+#bluetooth,
+#tray {
+  padding-left: 0.4em;
+  padding-right: 0.4em;
+}
+
+/* Workspaces */
+#workspaces {
+  margin-left: 6px;
 }
 
 #workspaces button {
-  color: @foreground;
-  padding-left: 0.5em;
-  padding-right: 0.5em;
+  color: @foreground-inactive;
+  padding-left: 0.6em;
+  padding-right: 0.6em;
   margin: 0 2px;
-  border-radius: 2px;
+  border-radius: 6px;
+  background: transparent;
+  border: 1px solid transparent;
+  transition: background 120ms ease-out, color 120ms ease-out, border-color 120ms ease-out;
 }
 
+#workspaces button:hover {
+  background-color: alpha(@foreground-inactive, 0.1);
+  color: @foreground;
+}
+
+#workspaces button.focused,
 #workspaces button.active {
-  background-color: @active-workspace;
-  color: @background;
-  opacity: 0.8;
+  background-color: alpha(@active-workspace, 0.14);
+  color: @foreground;
+  border-color: alpha(@active-workspace, 0.6);
 }
 
 #workspaces button.urgent {
-  color: #ff0000;
-  animation: urgent 1s infinite;
+  background-color: alpha(@accent-red, 0.25);
+  color: @accent-red;
+  border-color: @accent-red;
 }
 
 @keyframes urgent {
-  0% { opacity: 1; }
-  50% { opacity: 0.5; }
-  100% { opacity: 1; }
+  0% { background-color: alpha(@accent-red, 0.35); }
+  50% { background-color: alpha(@accent-red, 0.15); }
+  100% { background-color: alpha(@accent-red, 0.35); }
 }
 
 #workspaces button.empty {
-  color: #666666;
+  color: alpha(@foreground-inactive, 0.7);
 }
 
-#memory {
-  padding-left: 1em;
-  padding-right: 0.2em;
+/* Hyprland window title – subtle, centered feel */
+#window {
+  color: alpha(@foreground, 0.85);
 }
 
-#custom-network {
-  padding-left: 0.2em;
-  padding-right: 0.2em;
-}
-
-#network-speed {
-  padding-left: 0.2em;
-  padding-right: 0.2em;
-}
-
-#temperature {
-  padding-left: 0.2em;
-  padding-right: 0.5em;
-}
-
-#wireplumber {
-  padding-right: 0.2em;
-}
-
-#custom-mic_hw {
-  padding-right: 0.5em;
-}
-
-#battery {
-  padding-right: 0.5em;
-}
-
-#backlight {
-  padding-right: 0.5em;
-}
-
-#network {
-  padding-right: 0.5em;
-}
-
-#bluetooth {
-  padding-right: 0.5em;
-}
-
-#tray {
-  padding-right: 0.5em;
-}
-
-#clock {
-  padding-right: 0.8em;
-}
