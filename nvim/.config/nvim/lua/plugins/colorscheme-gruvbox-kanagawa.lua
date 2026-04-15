@@ -40,21 +40,21 @@ return {
   {
     "LazyVim/LazyVim",
     opts = {
-      colorscheme = "kanagawa-wave",
+      colorscheme = "tokyonight-night",
     },
   },
-  {
-    {
-      "folke/tokyonight.nvim",
-      opts = function(_, opts)
-        opts.style = "night"
-        opts.styles = {
-          functions = {},
-        }
-        opts.on_colors = function(colors)
-          colors.fg = "#DCD7BA"
-        end
-      end,
-    },
-  },
+  -- {
+  --   {
+  --     "folke/tokyonight.nvim",
+  --     opts = function(_, opts)
+  --       opts.style = "night"
+  --       opts.styles = {
+  --         functions = {},
+  --       }
+  --       opts.on_colors = function(colors)
+  --         colors.fg = "#DCD7BA"
+  --       end
+  --     end,
+  --   },
+  -- },
 }

@@ -1,13 +1,13 @@
-@define-color foreground #dcd7ba;          /* Kanagawa-like fg from original */
+@define-color foreground #dcd7ba; /* Kanagawa-like fg from original */
 @define-color foreground-inactive #727169; /* Dimmed text, original-like */
-@define-color background #050508;          /* Almost-black base, Kanagawa-ish */
-@define-color background-alt #0b0b10;      /* Slight lift */
-@define-color background-alt2 #14141c;     /* For modules */
-@define-color border-color #262631;        /* Soft border */
-@define-color active-workspace #7e9cd8;    /* Kanagawa blue hint */
-@define-color accent-purple #957fb8;       /* Subtle Kanagawa accent */
-@define-color accent-orange #e6c384;       /* Warm hint, used sparingly */
-@define-color accent-red #e46876;          /* Alert accent */
+@define-color background #050508; /* Almost-black base, Kanagawa-ish */
+@define-color background-alt #0b0b10; /* Slight lift */
+@define-color background-alt2 #14141c; /* For modules */
+@define-color border-color #262631; /* Soft border */
+@define-color active-workspace #7e9cd8; /* Kanagawa blue hint */
+@define-color accent-purple #957fb8; /* Subtle Kanagawa accent */
+@define-color accent-orange #e6c384; /* Warm hint, used sparingly */
+@define-color accent-red #e46876; /* Alert accent */
 
 * {
   font-family: JetBrainsMono Nerd Font;
@@ -41,7 +41,7 @@
 #bluetooth,
 #tray,
 #clock {
-  padding: 0 0.55em;       /* horizontal only, keeps height from growing */
+  padding: 0 0.55em; /* horizontal only, keeps height from growing */
 }
 
 /* Slightly wider padding for the first info module */
@@ -51,7 +51,7 @@
 
 /* Extra breathing room at the far right end */
 #clock {
-  padding-right: 1.0em;
+  padding-right: 1em;
 }
 
 /* Icons-only elements a bit tighter */
@@ -75,7 +75,10 @@
   border-radius: 6px;
   background: transparent;
   border: 1px solid transparent;
-  transition: background 120ms ease-out, color 120ms ease-out, border-color 120ms ease-out;
+  transition:
+    background 120ms ease-out,
+    color 120ms ease-out,
+    border-color 120ms ease-out;
 }
 
 #workspaces button:hover {
@@ -97,9 +100,15 @@
 }
 
 @keyframes urgent {
-  0% { background-color: alpha(@accent-red, 0.35); }
-  50% { background-color: alpha(@accent-red, 0.15); }
-  100% { background-color: alpha(@accent-red, 0.35); }
+  0% {
+    background-color: alpha(@accent-red, 0.35);
+  }
+  50% {
+    background-color: alpha(@accent-red, 0.15);
+  }
+  100% {
+    background-color: alpha(@accent-red, 0.35);
+  }
 }
 
 #workspaces button.empty {
@@ -110,4 +119,3 @@
 #window {
   color: alpha(@foreground, 0.85);
 }
-
