@@ -28,11 +28,11 @@ window-padding-y = 0
 window-padding-balance = true
 
 #font-family = "JetBrainsMono NF"
-font-style = "JetBrains Mono NL"
-font-style-bold = "JetBrainsMonoNL NF Bold"
-font-style-italic = "JetBrainsMonoNL NF Italic"
-font-style-bold-italic = "JetBrainsMonoNL NF Bold Italic"
-font-feature = -calt, -liga, -dlig
+# font-style = "JetBrains Mono NL"
+# font-style-bold = "JetBrainsMonoNL NF Bold"
+# font-style-italic = "JetBrainsMonoNL NF Italic"
+# font-style-bold-italic = "JetBrainsMonoNL NF Bold Italic"
+# font-feature = -calt, -liga, -dlig
 font-size = 14.75
 
 adjust-cell-height = 8%

@@ -27,7 +27,7 @@ return {
         "cmake-language-server",
         "css-lsp",
         "dockerfile-language-server",
-        "gopls",
+        -- "gopls",
         "html-lsp",
         "json-lsp",
         "lua-language-server",
@@ -37,7 +37,7 @@ return {
         "taplo",
         "typescript-language-server",
         "yaml-language-server",
-        "sqls",
+        -- "sqls",
         -- debug adapters
         "codelldb",
         "js-debug-adapter",

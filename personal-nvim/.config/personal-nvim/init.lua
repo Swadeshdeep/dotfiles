@@ -1,2 +1,2 @@
-require("ssa.config")
-require("ssa.lazy")
+vim.o.number = false
+vim.o.relativenumber = true
