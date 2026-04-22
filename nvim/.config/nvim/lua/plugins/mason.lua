@@ -24,7 +24,7 @@ return {
         -- language servers
         "bash-language-server",
         "clangd",
-        "cmake-language-server",
+        -- "cmake-language-server",
         "css-lsp",
         "dockerfile-language-server",
         -- "gopls",

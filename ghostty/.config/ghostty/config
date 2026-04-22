@@ -27,7 +27,7 @@ window-padding-x = 0
 window-padding-y = 0
 window-padding-balance = true
 
-#font-family = "JetBrainsMono NF"
+font-family = "JetBrainsMono Nerd Font"
 # font-style = "JetBrains Mono NL"
 # font-style-bold = "JetBrainsMonoNL NF Bold"
 # font-style-italic = "JetBrainsMonoNL NF Italic"
@@ -55,7 +55,7 @@ keybind = ctrl+backspace=text:\x1b\x7f
 
 mouse-hide-while-typing = true
 
-custom-shader = shaders/cursor_wrap.glsl
+custom-shader = shaders/cursor_warp.glsl
 
 # background-blur = 20
 # background-opacity = 0.85

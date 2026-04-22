@@ -13,7 +13,7 @@ map("n", "<leader>tg", "<cmd>CompetiTest receive problem<cr>", { desc = "Get cp 
 map("n", "<leader>tr", "<cmd>CompetiTest run<cr>", { desc = "Run test" })
 -- for changing theme
 map("n", "<leader>tk", "<cmd>colorscheme gruvbox-material<cr>", { desc = "Switch to gruvbox-material theme" })
-map("n", "<leader>tl", "<cmd>colorscheme tokyonight-night<cr>", { desc = "Switch to tokyonight-night theme" })
+map("n", "<leader>tl", "<cmd>colorscheme kanagawa-wave<cr>", { desc = "Switch to kanagawa-wave theme" })
 
 -- Keymaps for yazi file manager
 map("n", "<leader>fy", "<cmd>Yazi toggle<cr>", { desc = "Yazi Toggle" })

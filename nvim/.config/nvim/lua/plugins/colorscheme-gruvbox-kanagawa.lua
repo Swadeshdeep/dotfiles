@@ -10,6 +10,19 @@ return {
     end,
   },
   { "rebelot/kanagawa.nvim" },
+  { "ribru17/bamboo.nvim" },
+  { "sainnhe/everforest" },
+  {
+    "folke/tokyonight.nvim",
+    opts = {
+      style = "night",
+      on_colors = function(colors)
+        colors.fg = "#EEF1FF"
+        colors.fg_float = "#EEF1FF"
+        colors.fg_sidebar = "#DCE2FA"
+      end,
+    },
+  },
   -- {
   --   "motaz-shokry/gruvbox.nvim",
   --   name = "gruvbox",
@@ -43,18 +56,4 @@ return {
       colorscheme = "tokyonight-night",
     },
   },
-  -- {
-  --   {
-  --     "folke/tokyonight.nvim",
-  --     opts = function(_, opts)
-  --       opts.style = "night"
-  --       opts.styles = {
-  --         functions = {},
-  --       }
-  --       opts.on_colors = function(colors)
-  --         colors.fg = "#DCD7BA"
-  --       end
-  --     end,
-  --   },
-  -- },
 }
