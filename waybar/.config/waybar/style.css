@@ -111,7 +111,8 @@
   }
 }
 
-#workspaces button.empty {
+#workspaces button.empty,
+#workspaces button.hidden {
   color: alpha(@foreground-inactive, 0.7);
 }
 

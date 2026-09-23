@@ -1,0 +1,21 @@
+{
+  "CP Template": {
+    "prefix": "temp",
+    "description": "Competitive programming C++ starter template",
+    "body": [
+      "#include <bits/stdc++.h>",
+      "using namespace std;",
+      "typedef long long ll;",
+      "#define FOR(i,a,b) for (int i = a; i < b; i++)",
+      "",
+      "int main() {",
+      "  ios_base::sync_with_stdio(false);",
+      "  cin.tie(NULL);",
+      "",
+      "  $0",
+      "",
+      "  return 0;",
+      "}"
+    ]
+  }
+}

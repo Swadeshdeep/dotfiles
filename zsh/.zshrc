@@ -365,3 +365,11 @@ npx()  { _nvm_lazy_load; npx "$@" }
 # Final keybindings - ensure they stick
 bindkey -s ^b "nvims\n"
 bindkey '^T' fzf_file_widget
+
+# pnpm
+export PNPM_HOME="/home/swadesh/.local/share/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end

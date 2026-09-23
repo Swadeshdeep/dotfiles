@@ -3,6 +3,8 @@ require("config.lazy")
 require("config.code-runner")
 require("config.code-runner2")
 
+vim.opt.cmdheight = 1
+
 vim.api.nvim_create_autocmd({ "BufNewFile" }, {
   pattern = "/home/swadesh/programming/cp/*.cpp",
   command = "0r ~/.config/nvim/cpp_template.txt",

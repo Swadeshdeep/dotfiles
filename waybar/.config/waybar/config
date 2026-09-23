@@ -19,17 +19,25 @@
         "clock"
     ],
 
+    "ext/workspaces": {
+        "format": "{name}",
+        "on-click": "activate",
+        "sort-by-id": false,
+        "sort-by-name": true,
+        "ignore-hidden": true,
+        "active-only": false,
+        "on-scroll-up": "hyprctl dispatch 'hl.dsp.focus({ workspace = \"e-1\" })'",
+        "on-scroll-down": "hyprctl dispatch 'hl.dsp.focus({ workspace = \"e+1\" })'",
+        "format-icons": {
+            "urgent": "",
+            "default": ""
+        }
+    },
+
     "hyprland/workspaces": {
         "format": "{name}",
         "on-click": "activate",
-        "sort-by-number": true,
-        "persistent-workspaces": {
-            "1": [],
-            "2": [],
-            "3": [],
-            "4": [],
-            "5": []
-        },
+        "sort-by": "number",
         "active-only": false,
         "format-icons": {
             "urgent": "",

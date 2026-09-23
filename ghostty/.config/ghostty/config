@@ -1,8 +1,8 @@
-theme = Kanagawa Wave
+theme = TokyoNight Moon
 # window-decoration=false
 # palette = 0=#16161d
 # palette = 1=#c34043
-palette = 2=#98BB6C
+# palette = 2=#98BB6C
 # palette = 3=#c0a36e
 # palette = 4=#7e9cd8
 # palette = 5=#957fb8
@@ -17,6 +17,11 @@ palette = 2=#98BB6C
 # palette = 14=#7aa89f
 # palette = 15=#dcd7ba
 background = #000000
+foreground = #EEF1FF
+cursor-color = #EEF1FF
+selection-foreground = #EEF1FF
+palette = 15=#EEF1FF
+palette = 7=#DCE2FA
 # foreground = dcd7ba
 # cursor-color = c8c093
 # selection-background = 2d4f67
